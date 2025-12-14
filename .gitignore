@@ -1,0 +1,33 @@
+# =========================
+# Rust / Cargo
+# =========================
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# =========================
+# Downloaded data (SEC)
+# =========================
+companyfacts.zip
+companyfacts/
+
+# =========================
+# Logs / temp files
+# =========================
+*.log
+*.tmp
+
+# =========================
+# OS / Editor junk
+# =========================
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Neovim
+.nvim/
