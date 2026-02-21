@@ -75,7 +75,10 @@ impl HandlerCacheSubmissionsFileWithNoTickers
 		// Only push if not already present
 		if !array.iter().any(|v| v.as_str() == Some(submission_file_name))
 		{
-			log_debug!("Caching {} to submission-file-with-no-tickers.json", submission_file_name);
+			log_debug!(
+				"{} has invalid \"tickers\". Caching it to submission-file-with-no-tickers.json",
+				submission_file_name,
+			);
 
 			array.push(Value::String(submission_file_name.to_string()));
 		}

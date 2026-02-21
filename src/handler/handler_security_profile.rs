@@ -75,7 +75,7 @@ impl HandlerSecurityProfile
 			if handler_cache_submissions_file_with_no_tickers.is_tickerless_submission_file(&s_file_name)
 			{
 				log_debug!(
-					"[SKIP] cache.submission-file-with-no-tickers contains submissions/{}, skipping..",
+					"\"{}\" found in submission-file-with-no-tickers.json, skipping..",
 					s_file_name
 				);
 
@@ -86,16 +86,12 @@ impl HandlerSecurityProfile
 
 			if submissions_data.tickers.is_empty()
 			{
-				log_debug!(
-					"[SKIP] {} has invalid 'tickers'. adding to cache.json 'submission-file-with-no-tickers'..",
-					s_file_name
-				);
-
 				handler_cache_submissions_file_with_no_tickers.add_tickerless_submission_file_name(&s_file_name);
 
 				continue;
 			}
 
+			log_info!("");
 			log_info!("Synchronizing submissions/{}", s_file_name);
 			log_info!("CIK: {}", submissions_data.cik);
 			log_info!("Name: {}", submissions_data.name);

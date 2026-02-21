@@ -44,6 +44,8 @@ static LOG_LEVEL: Lazy<RwLock<LogLevel>> = Lazy::new(
 	{
 		dotenv().ok();
 
+		println!("LOG_LEVEL: {:?}", std::env::var("APP__DATABASE__URL").ok());
+
 		let level = std::env::var("LOG_LEVEL").ok().as_deref().and_then(LogLevel::from_str).unwrap_or(LogLevel::Info);
 
 		println!("LOG_LEVEL: {:?}", level);
