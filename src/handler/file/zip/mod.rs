@@ -1,5 +1,5 @@
-pub mod handler_companyfacts_zip;
-pub mod handler_submissions_zip;
+pub mod handler_file_companyfacts_zip;
+pub mod handler_file_submissions_zip;
 
-pub use handler_companyfacts_zip::HandlerCompanyfactsZip;
-pub use handler_submissions_zip::HandlerSubmissionsZip;
+pub use handler_file_companyfacts_zip::HandlerFileCompanyfactsZip;
+pub use handler_file_submissions_zip::HandlerFileSubmissionsZip;

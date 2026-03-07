@@ -5,16 +5,16 @@ use std::path::PathBuf;
 use std::fs::{ File, Metadata };
 use std::time::{ Duration, SystemTime };
 
-use crate::handler::file::zip::HandlerCompanyfactsZip;
-use crate::handler::file::zip::HandlerSubmissionsZip;
+use crate::handler::file::zip::HandlerFileCompanyfactsZip;
+use crate::handler::file::zip::HandlerFileSubmissionsZip;
 
 use crate::{ log_info };
 
 
 pub struct UpdatedSecCompanyfactsAndSubmissions
 {
-	pub handler_submissions_zip: HandlerSubmissionsZip,
-	pub handler_companyfacts_zip: HandlerCompanyfactsZip,
+	pub handler_file_submissions_zip: HandlerFileSubmissionsZip,
+	pub handler_file_companyfacts_zip: HandlerFileCompanyfactsZip,
 }
 
 pub struct HandlerApiSec
@@ -203,19 +203,19 @@ impl HandlerApiSec
 			log_info!("submissions.zip file is up-to-date. Skipping download.");
 		}
 
-		log_info!("{} exists, initializing a HandlerCompanyfactsZip for it..", Self::COMPANY_FACTS_ZIP);
+		log_info!("{} exists, initializing a HandlerFileCompanyfactsZip for it..", Self::COMPANY_FACTS_ZIP);
 
-		let handler_companyfacts_zip = HandlerCompanyfactsZip::new(self.path_dir_tmp.join(Self::COMPANY_FACTS_ZIP))?;
+		let handler_file_companyfacts_zip = HandlerFileCompanyfactsZip::new(self.path_dir_tmp.join(Self::COMPANY_FACTS_ZIP))?;
 
-		log_info!("{} exists, initializing a HandlerCompanyfactsZip for it..", Self::SUBMISSIONS_ZIP);
+		log_info!("{} exists, initializing a HandlerFileCompanyfactsZip for it..", Self::SUBMISSIONS_ZIP);
 
-		let handler_submissions_zip = HandlerSubmissionsZip::new(self.path_dir_tmp.join(Self::SUBMISSIONS_ZIP))?;
+		let handler_file_submissions_zip = HandlerFileSubmissionsZip::new(self.path_dir_tmp.join(Self::SUBMISSIONS_ZIP))?;
 
 		Ok(
 			UpdatedSecCompanyfactsAndSubmissions
 			{
-				handler_companyfacts_zip,
-				handler_submissions_zip,
+				handler_file_companyfacts_zip,
+				handler_file_submissions_zip,
 			}
 		)
 	}

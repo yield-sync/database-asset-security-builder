@@ -11,13 +11,13 @@ use crate::schema::{
 };
 
 
-pub struct HandlerCompanyfactsZip
+pub struct HandlerFileCompanyfactsZip
 {
 	archive: ZipArchive<File>,
 }
 
 
-impl HandlerCompanyfactsZip
+impl HandlerFileCompanyfactsZip
 {
 	fn extract_common_stock_shares_outstanding(
 		&mut self,

@@ -13,14 +13,14 @@ use crate::{ log_info };
 use crate::schema::{ SubmissionsData, SubmissionsDataFilings };
 
 
-pub struct HandlerSubmissionsZip
+pub struct HandlerFileSubmissionsZip
 {
 	path: PathBuf,
 	archive: ZipArchive<File>,
 }
 
 
-impl HandlerSubmissionsZip
+impl HandlerFileSubmissionsZip
 {
 	pub fn new(path: PathBuf) -> Result<Self, Box<dyn std::error::Error>>
 	{

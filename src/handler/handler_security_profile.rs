@@ -51,17 +51,19 @@ impl HandlerSecurityProfile
 
 		let UpdatedSecCompanyfactsAndSubmissions
 		{
-			mut handler_companyfacts_zip,
-			mut handler_submissions_zip,
+			mut handler_file_companyfacts_zip,
+			mut handler_file_submissions_zip,
 		} = handler_api_sec.get_updated_companyfacts_and_submissions().await?;
 
-		let submissions_file_names_to_hashs = handler_submissions_zip.compute_file_names_to_hashes()?;
+		let submissions_file_names_to_hashs = handler_file_submissions_zip.compute_file_names_to_hashes()?;
 
 		for (s_file_name, s_hash) in submissions_file_names_to_hashs
 		{
 			log_ultradebug!("Processing submissions/{}", s_file_name);
 
-			let submissions_data: SubmissionsData = handler_submissions_zip.extract_submissions_data(&s_file_name)?;
+			let submissions_data: SubmissionsData = handler_file_submissions_zip.extract_submissions_data(
+				&s_file_name
+			)?;
 
 			if submissions_data.tickers.is_empty()
 			{
@@ -142,9 +144,9 @@ impl HandlerSecurityProfile
 				&submissions_data.filings
 			).await?;
 
-			if handler_companyfacts_zip.file_exists(&s_file_name)
+			if handler_file_companyfacts_zip.file_exists(&s_file_name)
 			{
-				let companyfacts: Option<Companyfacts> = Some(handler_companyfacts_zip.extract_data(&s_file_name)?);
+				let companyfacts: Option<Companyfacts> = Some(handler_file_companyfacts_zip.extract_data(&s_file_name)?);
 
 				if let Some(companyfacts) = companyfacts
 				{
