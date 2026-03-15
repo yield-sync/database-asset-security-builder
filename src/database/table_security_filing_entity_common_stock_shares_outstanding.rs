@@ -3,7 +3,7 @@ use std::sync::Arc;
 use super::database_connection::DatabaseConnection;
 use crate::schema::CompanyfactsEntityCommonStockSharesOutstanding;
 
-use crate::{ log_info, log_warn };
+use crate::{ log_info, log_debug };
 
 
 pub enum TableSecurityFilingEntityCommonStockSharesOutstandingInsertionError
@@ -99,8 +99,8 @@ impl TableSecurityFilingEntityCommonStockSharesOutstanding
 
 					if ignore_foreign_key_not_found_error
 					{
-						log_warn!(
-							"[TableSecurityFilingEntityCommonStockSharesOutstandingInsertionError] {}, Skipping..",
+						log_debug!(
+							"[WARN][TableSecurityFilingEntityCommonStockSharesOutstandingInsertionError] {}, Skipping..",
 							error_message
 						);
 

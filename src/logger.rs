@@ -72,20 +72,20 @@ static LOG_LEVEL: Lazy<RwLock<LogLevel>> = Lazy::new(
 );
 
 
-	fn log(prefix: &str, level: LogLevel, args: Arguments)
+fn log(prefix: &str, level: LogLevel, args: Arguments)
+{
+	let current = *LOG_LEVEL.read().unwrap();
+
+	if current.weight() >= level.weight()
 	{
-		let current = *LOG_LEVEL.read().unwrap();
+		let color = level.color_code();
+		let reset = "\x1b[0m";
 
-		if current.weight() >= level.weight()
-		{
-			let color = level.color_code();
-			let reset = "\x1b[0m";
-
-			// This colors the prefix only.
-			// Move {reset} to the end if you want the whole line colored.
-			println!("{}{} {} {}", color, prefix, reset, args);
-		}
+		// This colors the prefix only.
+		// Move {reset} to the end if you want the whole line colored.
+		println!("{}{} {} {}", color, prefix, reset, args);
 	}
+}
 
 
 // ---------- public helpers ----------
@@ -112,7 +112,14 @@ pub fn info(args: Arguments)
 
 pub fn warn(args: Arguments)
 {
-	log("🚨 [WRN]", LogLevel::Warn, args);
+	dotenv().ok();
+
+	let suppress_warnings = std::env::var("SUPRESS_WARNINGS").unwrap_or_else(|_| "false".to_string());
+
+	if suppress_warnings == "false"
+	{
+		log("🚨 [WRN]", LogLevel::Warn, args);
+	}
 }
 
 pub fn error(args: Arguments)

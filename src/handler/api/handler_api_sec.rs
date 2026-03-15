@@ -207,7 +207,7 @@ impl HandlerApiSec
 
 		let handler_file_companyfacts_zip = HandlerFileCompanyfactsZip::new(self.path_dir_tmp.join(Self::COMPANY_FACTS_ZIP))?;
 
-		log_info!("{} exists, initializing a HandlerFileCompanyfactsZip for it..", Self::SUBMISSIONS_ZIP);
+		log_info!("{} exists, initializing a HandlerFileSubmissionsZip for it..", Self::SUBMISSIONS_ZIP);
 
 		let handler_file_submissions_zip = HandlerFileSubmissionsZip::new(self.path_dir_tmp.join(Self::SUBMISSIONS_ZIP))?;
 
